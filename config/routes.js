@@ -9,7 +9,16 @@
  */
 
 module.exports.routes = {
-  "POST /signup": { action: "users/signup" },
-  "POST /login": { action: "users/login" },
+  // --ROUTES FOR AUTHENTICATION.
+  "POST /api/v1/signup": { action: "auth/signup" },
+  "POST /api/v1/login": { action: "auth/login" },
+
+  // --REGISTER
+  "pOST /api/v1/register-location": { action: "register/location" },
+  "POST /api/v1/register-payer": { action: "register/payer" },
+  "POST /api/v1/register-service-provider": {
+    action: "register/service-provider",
+  },
+
   "GET /": { action: "home/protected" },
 };
