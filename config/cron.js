@@ -11,16 +11,16 @@ const make_payment = require("../api/controllers/payment/make-payment");
 
 module.exports.cron = {
   create_bill_every_month: {
-    schedule: "5 * * * * *", // Time setting
+    schedule: "* * * * * *", // Time setting
     onTick: function () {
-      create_bill.fn();
+      // create_bill.fn();
     },
     start: true,
   },
   send_bill_sms_every_month: {
-    schedule: "05 01 * * * *", // Time setting
+    schedule: "* * * * * *", // Time setting
     onTick: function () {
-      send_bill_sms.fn();
+      // send_bill_sms.fn();
     },
     start: true,
   },

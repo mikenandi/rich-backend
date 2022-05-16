@@ -19,6 +19,4 @@ module.exports.routes = {
   "POST /api/v1/register-service-provider": {
     action: "register/service-provider",
   },
-
-  "GET /": { action: "home/protected" },
 };

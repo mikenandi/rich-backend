@@ -50,15 +50,26 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
+      // for transforming values from frontend.
+      console.log(inputs.service);
+      let service;
+      if (inputs.service === "security guard") {
+        service = "security_guard";
+      }
+      if (inputs.service === "cleanes truck") {
+        service = "cleanes_truck";
+      }
+
       // --creating service provider object
       let service_provider = {
         name: inputs.name,
         phone_no: inputs.phone_no,
         account_no: inputs.account_no,
         charge_amount: inputs.charge_amount,
-        service: inputs.service,
+        service: service,
         type: inputs.type,
       };
+
       // --Now creating that provider to our DB.
       let created_service_provider = await Service_provider.create(
         service_provider

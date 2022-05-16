@@ -25,7 +25,6 @@ module.exports = {
     street: {
       type: "string",
       required: false,
-      unique: true,
       example: "Sinza A",
     },
     payer: {

@@ -24,14 +24,14 @@ module.exports = {
       required: true,
       description: "phone number of person",
     },
-    type: {
+    house_no: {
       type: "string",
       required: true,
       description:
         "payer work which will determine amount which he/she will be charged.",
     },
-    house_no: {
-      type: "number",
+    type: {
+      type: "string",
       required: true,
       isIn: ["normal-house", "house-with-tenant", "small-bussiness", "hotel"],
       description: "number of the house where the person is residing.",

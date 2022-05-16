@@ -9,6 +9,10 @@ module.exports = {
   description: "Signup action.",
 
   inputs: {
+    name: {
+      type: "string",
+      example: "michael nandi",
+    },
     email: {
       type: "string",
       required: true,

@@ -28,14 +28,25 @@ module.exports = {
         "payer work which will determine amount which he/she will be charged.",
     },
     house_no: {
-      type: "number",
+      type: "string",
       required: true,
       description: "number of the house where the person is residing.",
     },
-    location_id: {
-      type: "number",
+    region: {
+      type: "string",
       required: true,
-      description: "id of the place where the person is residing.",
+    },
+    distict: {
+      type: "string",
+      required: true,
+    },
+    ward: {
+      type: "string",
+      required: true,
+    },
+    street: {
+      type: "string",
+      required: true,
     },
   },
 
@@ -52,24 +63,51 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
+      console.log(inputs);
+      // transforming values.
+      //  isIn: ["normal-house", "house-with-tenant", "small-bussiness", "hotel"],
+      let type;
+      if (inputs.type === "normal house") {
+        type = "normal-house";
+      }
+
+      if (inputs.type === "house with tenant") {
+        type = "house-with-tenant";
+      }
+
+      if (inputs.type === "small bussiness") {
+        type = "small-bussiness";
+      }
+
+      if (inputs.type === "hotel") {
+        type = "hotel";
+      }
       // --creating control number.
       let control_number =
         (Math.random() + " ").substring(2, 10) +
         (Math.random() + " ").substring(2, 10);
+
+      // registering location from user
+      let location = await Location.create({
+        region: inputs.region,
+        district: inputs.distric,
+        ward: inputs.ward,
+        street: inputs.street,
+      }).fetch();
 
       // --creating object for payer
       let payer = {
         first_name: inputs.first_name,
         last_name: inputs.last_name,
         phone_no: inputs.phone_no,
-        type: inputs.type,
+        type: type,
         house_no: inputs.house_no,
         control_number: control_number,
       };
 
       let created_payer = await Payer.create(payer).fetch();
 
-      await Location.addToCollection(inputs.location_id, "payer").members([
+      await Location.addToCollection(location.id, "payer").members([
         created_payer.id,
       ]);
 
@@ -78,6 +116,7 @@ module.exports = {
         message: "payer was created.",
       });
     } catch (error) {
+      console.log(error.message);
       if (error.code === "E_UNIQUE") {
         return exits.failure({
           success: false,
