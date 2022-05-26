@@ -6,12 +6,20 @@
  */
 
 module.exports = {
+  primaryKey: "id",
   attributes: {
-    // ::PRIMITIVES
-    name: {
+    id: {
       type: "string",
       required: true,
-      example: "Firstname Lastname",
+    },
+    user_id: {
+      model: "user",
+      unique: true,
+    },
+    company_name: {
+      type: "string",
+      defaultsTo: "individual person",
+      example: "company",
     },
     type: {
       type: "string",

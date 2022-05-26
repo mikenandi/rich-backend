@@ -5,6 +5,6 @@ module.exports = {
     "Action that  will be running automatically every end of the month to pay service providers.",
 
   fn: async function () {
-    // console.log("making payement");
+    console.log("making payement");
   },
 };

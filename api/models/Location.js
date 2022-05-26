@@ -6,7 +6,12 @@
  */
 
 module.exports = {
+  primaryKey: "id",
   attributes: {
+    id: {
+      type: "string",
+      required: true,
+    },
     region: {
       type: "string",
       required: false,
@@ -26,6 +31,11 @@ module.exports = {
       type: "string",
       required: false,
       example: "Sinza A",
+    },
+    street_code: {
+      type: "string",
+      unique: true,
+      description: "auto generated for identifying streets.",
     },
     payer: {
       collection: "payer",

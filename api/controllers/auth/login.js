@@ -9,11 +9,9 @@ module.exports = {
   description: "Login users.",
 
   inputs: {
-    email: {
+    username: {
       type: "string",
       required: true,
-      isEmail: true,
-      example: "mike12@gmail.com",
     },
     password: {
       type: "string",
@@ -47,10 +45,15 @@ module.exports = {
   fn: async function (inputs, exits) {
     try {
       // --finding the user in our database.
-      let user = await User.findOne({ where: { email: inputs.email } });
+      let user = await User.findOne({ where: { username: inputs.username } });
 
       // --when the user is not found in the database.
-      if (!user) return exits.redirect("/signup");
+      if (!user)
+        return exits.failure({
+          success: false,
+          code: "username_not_found",
+          message: "username was not found.",
+        });
 
       // --comparing passwords btn entered password password from database.
       await sails.helpers.passwords
@@ -59,7 +62,8 @@ module.exports = {
           // --response when user entered wrong password.
           return exits.passwordMismatch({
             success: false,
-            message: "wrong password.",
+            code: "wrong_password",
+            message: "wrong password",
           });
         });
 
@@ -84,6 +88,8 @@ module.exports = {
         success: true,
         message: "successfull login",
         data: {
+          user_id: user.id,
+          role: user.role,
           token: "Bearer " + signedToken,
         },
       });

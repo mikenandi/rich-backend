@@ -5,10 +5,14 @@ module.exports = {
     "Action to register a person who is providing sevices for example cleaning trucks and security guards.",
 
   inputs: {
-    name: {
+    first_name: {
+      type: "string",
+    },
+    last_name: { type: "string" },
+    company_name: {
       type: "string",
       required: true,
-      example: "Firstname Lastname",
+      description: "the name of the company",
     },
     phone_no: {
       type: "string",
@@ -50,19 +54,42 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
-      // for transforming values from frontend.
-      console.log(inputs.service);
-      let service;
-      if (inputs.service === "security guard") {
-        service = "security_guard";
-      }
-      if (inputs.service === "cleanes truck") {
-        service = "cleanes_truck";
-      }
+      // Creating user service provider.
 
-      // --creating service provider object
+      // -- creating password which will be payer phone number.
+      let hashedPassword = await sails.helpers.passwords.hashPassword(
+        inputs.phone_no
+      );
+
+      // 👉 generating id string.
+      let user_id = await sails.helpers.generateId.with({ identity: "usr" });
+
+      // Creating user in our database
+      let user = {
+        id: user_id,
+        first_name: inputs.first_name,
+        last_name: inputs.last_name,
+        username: inputs.phone_no,
+        password: hashedPassword,
+        role: "service_provider",
+      };
+
+      let created_user = await User.create(user).fetch();
+
+      // -- Transforming values from frontend.
+      let service;
+      if (inputs.service === "security guard") service = "security_guard";
+
+      if (inputs.service === "cleanes truck") service = "cleanes_truck";
+
+      // -- Creating service provider object
+
+      // 👉 first generating id.
+      let provider_id = await sails.helpers.generateId.with({ identity: "pr" });
+
       let service_provider = {
-        name: inputs.name,
+        id: provider_id,
+        company_name: inputs.company_name,
         phone_no: inputs.phone_no,
         account_no: inputs.account_no,
         charge_amount: inputs.charge_amount,
@@ -70,10 +97,15 @@ module.exports = {
         type: inputs.type,
       };
 
-      // --Now creating that provider to our DB.
+      // -- Now creating that provider to our DB.
       let created_service_provider = await Service_provider.create(
         service_provider
-      );
+      ).fetch();
+
+      // -- Creating collection
+      await User.addToCollection(created_user.id, "service_provider").members([
+        created_service_provider.id,
+      ]);
 
       // --response for successfull response.
       return exits.success({

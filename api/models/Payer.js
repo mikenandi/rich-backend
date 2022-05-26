@@ -6,17 +6,15 @@
  */
 
 module.exports = {
+  primaryKey: "id",
   attributes: {
-    // ::PRIMITIVES
-    first_name: {
+    id: {
       type: "string",
       required: true,
-      description: "first name of the user.",
     },
-    last_name: {
-      type: "string",
-      required: true,
-      description: "last name of the user.",
+    user_id: {
+      model: "user",
+      unique: true,
     },
     phone_no: {
       type: "string",

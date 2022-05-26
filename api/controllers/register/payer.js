@@ -6,19 +6,16 @@ module.exports = {
   inputs: {
     first_name: {
       type: "string",
-      unique: true,
       description: "fullname of the user.",
     },
     last_name: {
       type: "string",
-      unique: true,
       description: "fullname of the user.",
     },
     phone_no: {
       type: "string",
       required: true,
-      maxLength: 10,
-      unique: true,
+      maxLength: 16,
       description: "phone number of person",
     },
     type: {
@@ -32,19 +29,7 @@ module.exports = {
       required: true,
       description: "number of the house where the person is residing.",
     },
-    region: {
-      type: "string",
-      required: true,
-    },
-    distict: {
-      type: "string",
-      required: true,
-    },
-    ward: {
-      type: "string",
-      required: true,
-    },
-    street: {
+    street_code: {
       type: "string",
       required: true,
     },
@@ -63,42 +48,61 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
-      console.log(inputs);
-      // transforming values.
-      //  isIn: ["normal-house", "house-with-tenant", "small-bussiness", "hotel"],
+      // 🌍 getting location from street code.
+      let location = await Location.findOne({
+        where: { street_code: inputs.street_code },
+      });
+
+      // -- response when the user entered wrong street code.
+      if (!location)
+        return exits.failure({
+          success: false,
+          message: "wrong street code.",
+        });
+
+      //  👇 transforming values.
       let type;
-      if (inputs.type === "normal house") {
-        type = "normal-house";
-      }
 
-      if (inputs.type === "house with tenant") {
-        type = "house-with-tenant";
-      }
+      if (inputs.type === "normal house") type = "normal-house";
 
-      if (inputs.type === "small bussiness") {
-        type = "small-bussiness";
-      }
+      if (inputs.type === "house with tenant") type = "house-with-tenant";
 
-      if (inputs.type === "hotel") {
-        type = "hotel";
-      }
-      // --creating control number.
-      let control_number =
-        (Math.random() + " ").substring(2, 10) +
-        (Math.random() + " ").substring(2, 10);
+      if (inputs.type === "small bussiness") type = "small-bussiness";
 
-      // registering location from user
-      let location = await Location.create({
-        region: inputs.region,
-        district: inputs.distric,
-        ward: inputs.ward,
-        street: inputs.street,
-      }).fetch();
+      if (inputs.type === "hotel") type = "hotel";
 
-      // --creating object for payer
-      let payer = {
+      // -- creating control number.
+      let control_number = (Math.random() + " ").substring(2, 12);
+
+      // 👇 Creating object for payer as user;
+
+      // -- creating password which will be payer phone number.
+      let hashedPassword = await sails.helpers.passwords.hashPassword(
+        inputs.phone_no
+      );
+
+      // 👇 generating id string.
+      let user_id = await sails.helpers.generateId.with({ identity: "usr" });
+
+      // -- creating user in our database
+      let user = {
+        id: user_id,
         first_name: inputs.first_name,
         last_name: inputs.last_name,
+        username: inputs.phone_no,
+        password: hashedPassword,
+        role: "payer",
+      };
+
+      let created_user = await User.create(user).fetch();
+
+      // 🙎 Creating payer object.
+
+      // 👉 first creating id
+      let payer_id = await sails.helpers.generateId.with({ identity: "py" });
+
+      let payer = {
+        id: payer_id,
         phone_no: inputs.phone_no,
         type: type,
         house_no: inputs.house_no,
@@ -107,15 +111,24 @@ module.exports = {
 
       let created_payer = await Payer.create(payer).fetch();
 
+      // 🔨 Creating collections
+      // -- Addding user id to table payer.
+      await User.addToCollection(created_user.id, "payer").members([
+        created_payer.id,
+      ]);
+
+      // -- Adding location id to table payer.
       await Location.addToCollection(location.id, "payer").members([
         created_payer.id,
       ]);
 
+      // -- Return when the response was successfull.
       return exits.success({
         success: true,
         message: "payer was created.",
       });
     } catch (error) {
+      // -- When the value entered violated unique contraint.
       console.log(error.message);
       if (error.code === "E_UNIQUE") {
         return exits.failure({
@@ -123,7 +136,8 @@ module.exports = {
           message: "phone number already exits.",
         });
       }
-      // --Catching any error.
+
+      // -- Catching any error.
       return exits.failure({
         success: false,
         message: error.message,

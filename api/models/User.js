@@ -7,11 +7,20 @@
 
 module.exports = {
   tableName: "users",
+  primaryKey: "id",
   attributes: {
-    email: {
+    id: {
       type: "string",
       required: true,
+    },
+    email: {
+      type: "string",
       isEmail: true,
+      description: "email of the user this will be used as username.",
+    },
+    username: {
+      type: "string",
+      required: true,
       unique: true,
       description: "email of the user this will be used as username.",
     },
@@ -32,9 +41,18 @@ module.exports = {
     },
     role: {
       type: "string",
-      required: false,
+      required: true,
+      isIn: ["admin", "payer", "service_provider"],
       unique: false,
       description: "role of the user.",
+    },
+    payer: {
+      collection: "payer",
+      via: "user_id",
+    },
+    service_provider: {
+      collection: "service_provider",
+      via: "user_id",
     },
   },
 };

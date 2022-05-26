@@ -9,14 +9,23 @@
  */
 
 module.exports.routes = {
-  // --ROUTES FOR AUTHENTICATION.
-  "POST /api/v1/signup": { action: "auth/signup" },
+  // -- ROUTES FOR AUTHENTICATION.
+  "POST /api/v1/register": { action: "auth/signup" },
   "POST /api/v1/login": { action: "auth/login" },
 
-  // --REGISTER
-  "pOST /api/v1/register-location": { action: "register/location" },
+  // -- REGISTER
+  "POST /api/v1/register-location": { action: "register/location" },
   "POST /api/v1/register-payer": { action: "register/payer" },
   "POST /api/v1/register-service-provider": {
     action: "register/service-provider",
   },
+
+  // -- 🛒 GET REQUESTS.
+  "GET /api/v1/search-location": { action: "search/region" },
+  "GET /api/v1/user-profile": { action: "profile/profile" },
+  "GET /api/v1/header-summary": { action: "dashboard/header-count" },
+  "GET /api/v1/payer-profile": { action: "profile/payer" },
+
+  // -- PUT REQUEST.
+  "PUT /api/v1/pay-bill": { action: "billing/pay-bill" },
 };

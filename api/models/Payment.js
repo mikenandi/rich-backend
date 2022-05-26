@@ -6,7 +6,12 @@
  */
 
 module.exports = {
+  orimaryKey: "id",
   attributes: {
+    id: {
+      type: "string",
+      required: true,
+    },
     service_provider_id: {
       model: "payer",
       description: "id that will be referencing the user.",

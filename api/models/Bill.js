@@ -6,7 +6,12 @@
  */
 
 module.exports = {
+  primaryKey: "id",
   attributes: {
+    id: {
+      type: "string",
+      required: true,
+    },
     payer_id: {
       model: "payer",
       description: "id that will be referencing the user.",

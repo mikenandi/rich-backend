@@ -9,9 +9,13 @@ module.exports = {
   description: "Signup action.",
 
   inputs: {
-    name: {
+    first_name: {
       type: "string",
-      example: "michael nandi",
+      example: "michael",
+    },
+    last_name: {
+      type: "string",
+      example: "nandi",
     },
     email: {
       type: "string",
@@ -40,13 +44,21 @@ module.exports = {
         inputs.password
       );
 
+      // --generating id.
+      let id = await sails.helpers.generateId.with({ identity: "usr" });
+
       // --creating variable user.
       let user = {
+        id: id,
+        first_name: inputs.first_name,
+        last_name: inputs.last_name,
+        username: inputs.email,
         email: inputs.email,
         password: hashedPassword,
+        role: "admin",
       };
 
-      let new_user = await User.create(user);
+      let created_user = await User.create(user).fetch();
 
       // --getting private key.
       const pathToKey = path.resolve("secrets/priv_key.pem");
@@ -54,7 +66,7 @@ module.exports = {
 
       // --creating payload.
       let payload = {
-        sub: user.id,
+        sub: created_user.id,
         iat: Date.now(),
       };
 
@@ -73,7 +85,11 @@ module.exports = {
       return exits.success({
         success: true,
         message: "new user was created",
-        data: { token: authToken },
+        data: {
+          user_id: created_user.id,
+          role: created_user.role,
+          token: authToken,
+        },
       });
     } catch (error) {
       // --when there is a person with that email already created.
