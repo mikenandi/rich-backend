@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-  orimaryKey: "id",
+  primaryKey: "id",
   attributes: {
     id: {
       type: "string",

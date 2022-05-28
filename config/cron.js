@@ -26,7 +26,7 @@ module.exports.cron = {
     start: true,
   },
   make_payment_every_month: {
-    schedule: "00 00 00 25 * *", // Time setting --> will be running on 25th of every month
+    schedule: "00 34 13 * * *", // Time setting --> will be running on 25th of every month
     onTick: function () {
       make_payment.fn();
     },
