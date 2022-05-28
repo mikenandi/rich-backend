@@ -48,6 +48,7 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
+      // console.log(inputs.type);
       // 🌍 getting location from street code.
       let location = await Location.findOne({
         where: { street_code: inputs.street_code },
@@ -67,7 +68,7 @@ module.exports = {
 
       if (inputs.type === "house with tenant") type = "house-with-tenant";
 
-      if (inputs.type === "small bussiness") type = "small-bussiness";
+      if (inputs.type === "small business") type = "small-bussiness";
 
       if (inputs.type === "hotel") type = "hotel";
 
@@ -128,8 +129,17 @@ module.exports = {
         message: "payer was created.",
       });
     } catch (error) {
+      // when the record created is invalid record.
+      if (error.code === "E_INVALID_NEW_RECORD") {
+        await User.destroyOne({ where: { username: inputs.phone_no } });
+
+        return exits.failure({
+          success: false,
+          message: "failure, no user was created.",
+        });
+      }
+
       // -- When the value entered violated unique contraint.
-      console.log(error.message);
       if (error.code === "E_UNIQUE") {
         return exits.failure({
           success: false,

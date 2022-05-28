@@ -18,8 +18,16 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
+      // 🕐 formating time
+      let year_month = new Date().toISOString().substring(0, 7);
+
       // 🐙 getting data counts from our database.
+      let monthly_total = await Bill.sum("paid_amount").where({
+        updated_at: { startsWith: year_month },
+      });
+
       let total_streets = await Location.count();
+
       let total_payers = await Payer.count();
 
       return exits.success({
@@ -28,6 +36,7 @@ module.exports = {
         data: {
           streets: total_streets,
           payers: total_payers,
+          monthly_collections: monthly_total,
         },
       });
     } catch (error) {

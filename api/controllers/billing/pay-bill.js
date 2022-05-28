@@ -28,56 +28,85 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
-      // creating variable for paid amount.
-      let paid_amount = inputs.amount;
+      let user = await User.findOne({ where: { id: inputs.user_id } }).populate(
+        "payer"
+      );
+
+      let payer_id_record = user.payer[0].id;
+
+      if (!user)
+        return exits.failure({ success: false, message: "invalid payer." });
 
       // checking if paid amount if greater than the sum of all bills.
       let check_total = await Bill.sum("amount").where({
-        payer_id: inputs.user_id,
+        payer_id: payer_id_record,
       });
 
       if (check_total === 0)
-        exits.failure({
+        return exits.failure({
           success: false,
+          code: "no_unpaid_bill",
           message: "no bill is unpaid",
         });
 
-      if (paid_amount > check_total)
+      if (inputs.amount > check_total)
         return exits.failure({
           success: false,
-          message: "greater paid amount.",
+          code: "greater_than_bill_total",
+          message: "greater paid amount than what you are supposed to pay.",
         });
 
       // checking bills first
       let bill_record = await Bill.find({
-        where: { payer_id: inputs.user_id },
+        where: { payer_id: payer_id_record },
       });
 
+      // 🎲 setting paid amount.
+      let paid_amount = inputs.amount;
+
+      // processing bill payments.
       for (let bill of bill_record) {
-        if (bill.status === "unpaid" && paid_amount > bill.amount) {
-          paid_amount = paid_amount - bill.amount;
-          console.log("here first.");
+        if (bill.status === "unpaid" && paid_amount === bill.amount) {
+          let remained_bill = bill.amount - paid_amount;
+          let paid_amount_value = bill.paid_amount + paid_amount;
+
           await Bill.update({ id: bill.id }).set({
-            amount: 0,
+            amount: remained_bill,
+            paid_amount: paid_amount_value,
             status: "paid",
           });
+
+          break;
+        }
+
+        if (bill.status === "unpaid" && paid_amount > bill.amount) {
+          paid_amount = paid_amount - bill.amount;
+
+          await Bill.update({ id: bill.id }).set({
+            amount: 0,
+            paid_amount: bill.amount,
+            status: "paid",
+          });
+
+          continue;
         }
 
         if (bill.amount > paid_amount && bill.status === "unpaid") {
-          console.log("second one");
           let remained_bill = bill.amount - paid_amount;
-          paid_amount = 0;
-          console.log("here second");
+          let paid_amount_value = bill.paid_amount + paid_amount;
+
           await Bill.update({ id: bill.id }).set({
             amount: remained_bill,
+            paid_amount: paid_amount_value,
+            status: "unpaid",
           });
 
-          if (paid_amount === 0) break;
+          break;
         }
       }
 
       let total_bill = await Bill.sum("amount").where({
-        payer_id: inputs.user_id,
+        payer_id: payer_id_record,
       });
 
       return exits.success({

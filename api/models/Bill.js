@@ -21,6 +21,11 @@ module.exports = {
       required: true,
       description: "amount that he/she is required to pay.",
     },
+    paid_amount: {
+      type: "number",
+      defaultsTo: 0,
+      description: "the amount which the person paid on bill.",
+    },
     status: {
       type: "string",
       isIn: ["paid", "unpaid"],

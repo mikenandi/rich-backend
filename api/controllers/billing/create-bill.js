@@ -60,7 +60,7 @@ module.exports = {
 
         // CASE 4: hotel
         if (record.type === "hotel") {
-          // --Creating new bill
+          // -- Creating new bill
           let id = await sails.helpers.generateId.with({ identity: "bl" });
           let bill_created = await Bill.create({
             id: id,

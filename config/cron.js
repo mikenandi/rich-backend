@@ -12,7 +12,7 @@ const make_payment = require("../api/controllers/payment/make-payment");
 module.exports.cron = {
   create_bill_every_month: {
     // Bill will be created one day before sending bill sms.
-    schedule: "00 05 20 * * *", // Time setting
+    schedule: "00 39 04 * * *", // Time setting
     onTick: function () {
       create_bill.fn();
     },
