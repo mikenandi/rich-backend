@@ -42,17 +42,9 @@ module.exports = {
     role: {
       type: "string",
       required: true,
-      isIn: ["admin", "payer", "service_provider"],
+      isIn: ["maid", "employer", "agent"],
       unique: false,
       description: "role of the user.",
-    },
-    payer: {
-      collection: "payer",
-      via: "user_id",
-    },
-    service_provider: {
-      collection: "service_provider",
-      via: "user_id",
     },
   },
 };

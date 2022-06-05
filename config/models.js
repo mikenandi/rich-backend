@@ -10,7 +10,7 @@ module.exports.models = {
   migrate: "alter",
 
   attributes: {
-    // --auto created attributes for the database.
+    // -- 👋 auto created attributes for the database.
     id: { type: "number", autoIncrement: true },
     created_at: { type: "string", autoCreatedAt: true },
     updated_at: { type: "string", autoUpdatedAt: true },
