@@ -45,9 +45,9 @@ module.exports = {
      ***************************************************************************/
     default: {
       url: "postgres://gdzkollrlgbujp:2f42e6c77daa866d205569890779fbcdc41ac9a93e1457f8515196128b3d8f01@ec2-34-231-221-151.compute-1.amazonaws.com:5432/d3fs0qj9n2clkm",
-    },
-    ssl: {
-      rejectUnauthorized: false,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     },
   },
 
