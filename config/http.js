@@ -26,12 +26,12 @@ module.exports.http = {
      * (This Sails app's routes are handled by the "router" middleware below.)  *
      *                                                                          *
      ***************************************************************************/
-    passportInit: require("passport").initialize(),
+    // passportInit: require("passport").initialize(),
 
     order: [
       "cookieParser",
       "session",
-      "passportInit",
+      // "passportInit",
       "bodyParser",
       "compress",
       "poweredBy",

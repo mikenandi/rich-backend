@@ -26,11 +26,12 @@ module.exports = {
     };
 
     // creating random rumber
-    let random_number = generate_random_number(8, 64);
+    // let random_number = generate_random_number(8, 64);
 
     //Generating random string with number generated.
+    let number = 8;
     const random_string = crypto
-      .randomBytes(random_number)
+      .randomBytes(number)
       .toString("base64")
       .replace(/[/\+=]/g, "");
 

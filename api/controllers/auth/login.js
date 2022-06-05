@@ -9,7 +9,7 @@ module.exports = {
   description: "Login users.",
 
   inputs: {
-    username: {
+    email: {
       type: "string",
       required: true,
     },
@@ -22,30 +22,26 @@ module.exports = {
   exits: {
     success: {
       statusCode: 200,
-      description: "user was succesfully logged in",
+      description: "succesfully loggin",
     },
     failure: {
       statusCode: 401,
-      description: "user was not authorized",
+      description: "failure",
     },
     emailNotFound: {
       statusCode: 401,
-      description: "email entered was not found.",
+      description: "email not found.",
     },
     passwordMismatch: {
       statusCode: 400,
-      description: "the user entered the wrong password",
-    },
-    redirect: {
-      statusCode: 302,
-      description: "redirected to register route",
+      description: "wrong password",
     },
   },
 
   fn: async function (inputs, exits) {
     try {
       // --finding the user in our database.
-      let user = await User.findOne({ where: { username: inputs.username } });
+      let user = await User.findOne({ where: { email: inputs.email } });
 
       // --when the user is not found in the database.
       if (!user)
@@ -89,13 +85,17 @@ module.exports = {
         message: "successfull login",
         data: {
           user_id: user.id,
-          role: user.role,
-          token: "Bearer " + signedToken,
+          user_role: user.role,
+          auth_token: "Bearer " + signedToken,
         },
       });
     } catch (error) {
       // --any other failure on login.
-      return exits.failure({ success: false, message: error.message });
+      return exits.failure({
+        success: false,
+        code: error.code,
+        message: error.message,
+      });
     }
   },
 };

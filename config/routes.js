@@ -9,7 +9,6 @@
  */
 
 module.exports.routes = {
-  // -- ROUTES FOR AUTHENTICATION.
-  "POST /api/v1/register": { action: "auth/signup" },
+  "POST /api/v1/register": { action: "auth/signup", cors: true, csrf: false },
   "POST /api/v1/login": { action: "auth/login" },
 };
