@@ -44,29 +44,10 @@ module.exports = {
      *                                                                          *
      ***************************************************************************/
     default: {
-      // adapter: 'sails-mysql',
-      // url: 'mysql://user:password@host:port/database',
-      //--------------------------------------------------------------------------
-      //  /\   To avoid checking it in to version control, you might opt to set
-      //  ||   sensitive credentials like `url` using an environment variable.
-      //
-      //  For example:
-      //  ```
-      //  sails_datastores__default__url=mysql://admin:myc00lpAssw2D@db.example.com:3306/my_prod_db
-      //  ```
-      //--------------------------------------------------------------------------
-      /****************************************************************************
-       *                                                                           *
-       * More adapter-specific options                                             *
-       *                                                                           *
-       * > For example, for some hosted PostgreSQL providers (like Heroku), the    *
-       * > extra `ssl: true` option is mandatory and must be provided.             *
-       *                                                                           *
-       * More info:                                                                *
-       * https://sailsjs.com/config/datastores                                     *
-       *                                                                           *
-       ****************************************************************************/
-      // ssl: true,
+      url: "postgres://gdzkollrlgbujp:2f42e6c77daa866d205569890779fbcdc41ac9a93e1457f8515196128b3d8f01@ec2-34-231-221-151.compute-1.amazonaws.com:5432/d3fs0qj9n2clkm",
+    },
+    ssl: {
+      rejectUnauthorized: false,
     },
   },
 
