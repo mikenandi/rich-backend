@@ -7,7 +7,7 @@ module.exports.models = {
 
   // --making the database migration to be altered on
   // --development other option is droping all data when you refresh.
-  migrate: "alter",
+  migrate: "safe",
 
   attributes: {
     // -- 👋 auto created attributes for the database.

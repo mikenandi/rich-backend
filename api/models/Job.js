@@ -17,7 +17,7 @@ module.exports = {
       type: "string",
       required: true,
     },
-    type: {
+    job_type: {
       type: "string",
       isIn: ["full-time", "part-time"],
       required: true,
