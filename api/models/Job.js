@@ -34,8 +34,17 @@ module.exports = {
       type: "string",
       defaultsTo: "no descriptions",
     },
+    job_status: {
+      type: "string",
+      isIn: ["available", "not_available"],
+      defaultsTo: "available",
+    },
     employer_id: {
       model: "user",
+    },
+    application: {
+      collection: "application",
+      via: "job_id",
     },
   },
 };
