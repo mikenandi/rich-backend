@@ -19,4 +19,5 @@ module.exports.routes = {
   "PUT /api/v1/call-for-interview": { action: "employer/interview-applicant" },
   "PUT /api/v1/accept-applicant": { action: "employer/accept-applicant" },
   "GET /api/v1/application-statuses": { action: "maid/application-status" },
+  "POST /api/v1/register-maid": { action: "agent/register-maid" },
 };

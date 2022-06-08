@@ -37,7 +37,7 @@ module.exports = {
     role: {
       type: "string",
       required: true,
-      isIn: ["maid", "employer", "agent", "maid-created-by-agent"],
+      isIn: ["maid", "employer", "agent", "maid-by-agent"],
       unique: false,
       description: "role of the user.",
     },
