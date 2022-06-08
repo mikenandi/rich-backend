@@ -20,7 +20,7 @@ module.exports = {
     },
     status: {
       type: "string",
-      isIn: ["pending", "call-for-enterview", "accepted"],
+      isIn: ["pending", "call-for-interview", "accepted", "not-accepted"],
       defaultsTo: "pending",
     },
   },

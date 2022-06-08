@@ -24,10 +24,12 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
+      // 🎣 checking jobs available
       let jobs_recorded = await Job.find({
         where: { employer_id: inputs.user_id, job_status: "available" },
       });
 
+      // checking if there is any jobs found first
       if (jobs_recorded.length === 0) {
         // return when there is no job with that identity
         return exits.success({
