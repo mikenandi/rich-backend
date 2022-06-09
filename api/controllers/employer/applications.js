@@ -30,7 +30,6 @@ module.exports = {
       let applications_recorded = await Job.find({
         where: { employer_id: inputs.user_id, job_status: "available" },
       }).populate("application");
-      console.log(applications_recorded);
       // checking if there is any jobs found first
       if (applications_recorded.length === 0) {
         // return when there is no job with that identity
@@ -43,7 +42,7 @@ module.exports = {
       let jobs_with_applications = applications_recorded.filter((job_post) => {
         return job_post.application.length > 0;
       });
-
+      console.log(jobs_with_applications);
       if (jobs_with_applications.length === 0) {
         // return when there is no job with that identity
         return exits.success({
