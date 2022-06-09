@@ -56,7 +56,7 @@ module.exports = {
       for (let job_with_application of jobs_with_applications) {
         // looping for every application
         // 😅
-
+        console.log(job_with_application);
         for (let application of job_with_application.application) {
           // looping to find data for every user in our object.
           // 🙋
