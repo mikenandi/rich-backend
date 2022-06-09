@@ -27,6 +27,20 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
+      //first checking if the user is a maid or not
+      let isMaid = await User.findOne({
+        where: { id: inputs.user_id, role: ["maid", "maid-by-agent"] },
+      });
+
+      if (!isMaid) {
+        return exits.failure({
+          success: false,
+          code: "un_authorized",
+          message: "only maids can apply for jobs",
+        });
+      }
+
+      // checking user has already applied for the job.
       let existing_application = await Application.findOne({
         where: { applicant_id: inputs.user_id, job_id: inputs.job_id },
       });

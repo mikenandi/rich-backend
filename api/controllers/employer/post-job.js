@@ -42,6 +42,18 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
+      // first checkig if the user is employer
+      let isEmployer = await User.findOne({
+        where: { id: inputs.user_id, role: "employer" },
+      });
+
+      if (!isEmployer) {
+        return exits.failure({
+          success: false,
+          code: "un_authorized",
+          message: "only employer can post job",
+        });
+      }
       // generating id.
       let generated_id = await sails.helpers.generateId.with({
         identity: "jb",
