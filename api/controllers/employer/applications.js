@@ -60,6 +60,11 @@ module.exports = {
         for (let application of job_with_application.application) {
           // looping to find data for every user in our object.
           // 🙋
+          if (
+            application.status === "call-for-interview" ||
+            application.status === "accepted"
+          )
+            continue;
 
           let applicant_data = await User.findOne({
             where: { id: application.applicant_id },
@@ -85,7 +90,7 @@ module.exports = {
             .replace(" ago", "");
 
           // creating object that will have format of our expected output.
-          formated_object = {
+          let formated_object = {
             id: applicant_data.id,
             application_id: application.id,
             first_name: applicant_data.first_name,
