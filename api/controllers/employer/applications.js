@@ -56,6 +56,7 @@ module.exports = {
             "location_id",
           ],
         });
+        console.log(applicant_data.location_id);
 
         let location = await Location.findOne({
           where: { id: applicant_data.location_id },
