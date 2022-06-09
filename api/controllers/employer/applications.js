@@ -32,7 +32,8 @@ module.exports = {
       }).populate("application");
 
       // checking if there is any jobs found first
-      if (applications_recorded[0].application.length === 0) {
+      console.log(applications_recorded);
+      if (applications_recorded.length === 0) {
         // return when there is no job with that identity
         return exits.success({
           success: true,
