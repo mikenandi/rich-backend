@@ -23,10 +23,6 @@ module.exports = {
       isEmail: true,
       example: "mikejohn@gmail.com",
     },
-    password: {
-      type: "string",
-      required: true,
-    },
     phone_number: {
       type: "string",
       required: true,
@@ -103,9 +99,7 @@ module.exports = {
       created_location = await Location.create(location_data).fetch();
 
       // Hashing password.
-      let hashedPassword = await sails.helpers.passwords.hashPassword(
-        inputs.email
-      );
+      let hashedPassword = await sails.helpers.passwords.hashPassword("123456");
 
       // Generating id.
       let generated_user_id = await sails.helpers.generateId.with({
