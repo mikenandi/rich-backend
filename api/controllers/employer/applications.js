@@ -60,7 +60,6 @@ module.exports = {
         for (let application of job_with_application.application) {
           // looping to find data for every user in our object.
           // 🙋
-          console.log(application);
 
           let applicant_data = await User.findOne({
             where: { id: application.applicant_id },
@@ -74,8 +73,6 @@ module.exports = {
               "location_id",
             ],
           });
-
-          console.log(applicant_data);
 
           // 🌎 finding location of the person.
           let location = await Location.findOne({
