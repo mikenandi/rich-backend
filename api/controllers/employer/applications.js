@@ -32,7 +32,7 @@ module.exports = {
       }).populate("application");
 
       // checking if there is any jobs found first
-      if (applications_recorded.length === 0) {
+      if (applications_recorded[0].application.length === 0) {
         // return when there is no job with that identity
         return exits.success({
           success: true,
@@ -40,15 +40,9 @@ module.exports = {
         });
       }
 
-      let applications_filtered = applications_recorded.filter(
-        (application) => {
-          return application.application.length > 0;
-        }
-      );
-
       let formated_response = [];
 
-      for (let application of applications_filtered[0].application) {
+      for (let application of applications_recorded[0].application) {
         let applicant_data = await User.findOne({
           where: { id: application.applicant_id },
           select: [
@@ -86,6 +80,8 @@ module.exports = {
         };
 
         formated_response.push(formated_object);
+
+        continue;
       }
 
       // return for the data.
