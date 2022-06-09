@@ -39,7 +39,7 @@ module.exports = {
           message: "you do not have any job posts.",
         });
       }
-      console.log(applications_recorded[0].application === 0);
+      console.log(applications_recorded[0].application);
       if (applications_recorded[0].application.length === 0) {
         // return when there is no job with that identity
         return exits.success({
