@@ -4,7 +4,13 @@ module.exports = {
   description:
     "Action that will enable user to see available jobs in the market.",
 
-  inputs: {},
+  inputs: {
+    user_id: {
+      type: "string",
+      required: true,
+      description: "id of maid.",
+    },
+  },
 
   exits: {
     failure: {
@@ -30,6 +36,12 @@ module.exports = {
 
       // looping to find location of each job.
       for (let job of jobs_available) {
+        // checking if the candidate already applied for the job.
+        let isAlreadyApplied = await Application.findOne({
+          where: { applicant_id: inputs.user_id, job_id: job.id },
+        });
+
+        if (isAlreadyApplied) break;
         // getting location id that relates to the job.
         let extracted_location_id = await User.findOne({
           where: { id: job.employer_id },
