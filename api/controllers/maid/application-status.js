@@ -33,6 +33,7 @@ module.exports = {
 
       for (let application of application_status) {
         // checking the job first
+
         let job = await Job.findOne({ where: { id: application.job_id } });
 
         // checking if job is available
