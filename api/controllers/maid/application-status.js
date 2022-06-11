@@ -29,24 +29,63 @@ module.exports = {
         where: { applicant_id: inputs.user_id },
       });
 
-      let status_for_available_jobs = [];
+      // if there is nothing on the array
+      if (application_status.length === 0) {
+        return exits.success({
+          success: true,
+          message: "you have not applied to any job.",
+        });
+      }
+
+      let formated_output = [];
 
       for (let application of application_status) {
         // checking the job first
-
         let job = await Job.findOne({ where: { id: application.job_id } });
 
-        // checking if job is available
-        if (job.job_status === "available") {
-          status_for_available_jobs.push(application);
-          continue;
-        }
+        // checking if job is un_available will move to next iteration.
+        if (job.job_status === "un_available") continue;
+
+        // Finding user data.
+        let employer = await User.findOne({
+          where: { id: job.employer_id },
+          select: [
+            "first_name",
+            "last_name",
+            "gender",
+            "phone_number",
+            "location_id",
+          ],
+        });
+
+        // Finding location of the employer.
+        let location = await Location.findOne({
+          where: { id: employer.location_id },
+        });
+
+        // making an object that will be returned to the user.
+        let formated_object = {
+          id: application.id,
+          job_title: job.service,
+          employer: employer.first_name + " " + employer.last_name,
+          phone_number: employer.phone_number,
+          location: location.region + ", " + location.ward,
+          salary: job.salary,
+          type: job.type,
+          status: application.status,
+        };
+
+        // adding the formated object to our formated output
+        formated_output.push(formated_object);
+
+        continue;
       }
 
+      // return for successfull response.
       return exits.success({
         success: true,
         message: "successfull response.",
-        data: status_for_available_jobs,
+        data: formated_output,
       });
     } catch (error) {
       // catching any other error.
