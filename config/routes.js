@@ -21,4 +21,7 @@ module.exports.routes = {
   "GET /api/v1/application-statuses": { action: "maid/application-status" },
   "POST /api/v1/register-maid": { action: "agent/register-maid" },
   "GET /api/v1/available-jobs": { action: "maid/available-jobs" },
+  "GET /api/v1/applicants-to-interview": {
+    action: "employer/applicants-to-interview",
+  },
 };
