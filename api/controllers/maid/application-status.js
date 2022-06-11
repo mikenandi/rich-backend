@@ -29,14 +29,6 @@ module.exports = {
         where: { applicant_id: inputs.user_id },
       });
 
-      // if there is nothing on the array
-      if (application_status.length === 0) {
-        return exits.success({
-          success: true,
-          message: "you have not applied to any job.",
-        });
-      }
-
       let formated_output = [];
 
       for (let application of application_status) {
