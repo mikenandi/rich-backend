@@ -63,7 +63,7 @@ module.exports = {
           phone_number: employer.phone_number,
           location: location.region + ", " + location.ward,
           salary: job.salary,
-          type: job.type,
+          type: job.job_type,
           status: application.status,
         };
 
