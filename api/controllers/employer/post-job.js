@@ -101,9 +101,9 @@ module.exports = {
           method: "POST",
           url: "https://exp.host/--/api/v2/push/send",
           headers: {
-            Accept: "application/json",
-            "Accept-encoding": "gzip, deflate",
-            "Content-Type": "application/json",
+            // Accept: "application/json",
+            // "Accept-encoding": "gzip, deflate",
+            // "Content-Type": "application/json",
           },
           data: JSON.stringify({
             to: person.notification_token,
