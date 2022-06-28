@@ -9,7 +9,6 @@
  */
 
 module.exports.routes = {
-  "POST /api/v1/register-token": { action: "notification/save-token-record" },
   "POST /api/v1/register": { action: "auth/signup" },
   "POST /api/v1/login": { action: "auth/login" },
   "GET /api/v1/profile": { action: "user/profile" },
@@ -25,7 +24,8 @@ module.exports.routes = {
   "GET /api/v1/applicants-to-interview": {
     action: "employer/applicants-to-interview",
   },
-  // "POST /api/v1/save-token-record": {
-  //   action: "notificatio/save-token-record",
-  // },
+  "GET /api/v1/hello": { action: "notication/hello" },
+  "POST /api/v1/save-token-record": {
+    action: "notification/save-token",
+  },
 };
