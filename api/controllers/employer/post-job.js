@@ -1,3 +1,5 @@
+const axios = require("axios");
+
 module.exports = {
   friendlyName: "New job",
 
@@ -90,6 +92,34 @@ module.exports = {
       await User.addToCollection(inputs.user_id, "job").members([
         created_job.id,
       ]);
+
+      // let message = {
+      //   to: expoPushToken,
+      //   sound: "default",
+      //   title: "Smart Maids.",
+      //   body: "New jobs have been posted, please check out!",
+      //   data: { someData: "goes here" },
+      // };
+
+      let expoToken = notificationTokenRecord.notification_token;
+
+      // sending token to clients
+      let response = await axios({
+        method: "POST",
+        url: "https://exp.host/--/api/v2/push/send",
+        headers: {
+          Accept: "application/json",
+          "Accept-encoding": "gzip, deflate",
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify({
+          to: "ExponentPushToken[h8M5dtDm3q1H4f2f6iJ-ke]",
+          sound: "default",
+          title: "Smart Maids.",
+          body: "New jobs have been posted, please check out!",
+          data: { someData: "goes here" },
+        }),
+      });
 
       return exits.success({
         success: true,

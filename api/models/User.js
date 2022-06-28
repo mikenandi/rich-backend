@@ -65,5 +65,9 @@ module.exports = {
       collection: "application",
       via: "applicant_id",
     },
+    notifier: {
+      collection: "notifier",
+      via: "user_id",
+    },
   },
 };
