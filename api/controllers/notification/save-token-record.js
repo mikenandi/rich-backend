@@ -1,7 +1,7 @@
 module.exports = {
   friendlyName: "Save token",
 
-  description: "",
+  description: "action that will be saving token from our client phone.",
 
   inputs: {
     notificationToken: {
