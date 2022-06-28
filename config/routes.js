@@ -24,7 +24,6 @@ module.exports.routes = {
   "GET /api/v1/applicants-to-interview": {
     action: "employer/applicants-to-interview",
   },
-  "GET /api/v1/hello": { action: "notication/hello" },
   "POST /api/v1/save-token-record": {
     action: "notification/save-token",
   },
