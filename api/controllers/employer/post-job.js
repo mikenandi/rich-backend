@@ -101,7 +101,7 @@ module.exports = {
       //   data: { someData: "goes here" },
       // };
 
-      let expoToken = notificationTokenRecord.notification_token;
+      // let expoToken = notificationTokenRecord.notification_token;
 
       // sending token to clients
       let response = await axios({
