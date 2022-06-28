@@ -41,7 +41,7 @@ module.exports = {
       }
 
       // creating the id.
-      let id = sails.helpers.generateId.with({ identity: "ntf" });
+      let id = await sails.helpers.generateId.with({ identity: "ntf" });
 
       let saved_notifier = await Notifier.create({
         id: id,
