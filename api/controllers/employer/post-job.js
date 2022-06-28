@@ -101,17 +101,17 @@ module.exports = {
           method: "POST",
           url: "https://exp.host/--/api/v2/push/send",
           headers: {
-            // Accept: "application/json",
-            // "Accept-encoding": "gzip, deflate",
-            // "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-encoding": "gzip, deflate",
+            "Content-Type": "application/json",
           },
-          data: JSON.stringify({
+          data: {
             to: person.notification_token,
             sound: "default",
             title: "Smart Maids.",
             body: "New jobs have been posted, please check out!",
             data: { someData: "goes here" },
-          }),
+          },
         });
 
         continue;
