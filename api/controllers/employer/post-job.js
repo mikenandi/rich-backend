@@ -113,6 +113,8 @@ module.exports = {
             data: { someData: "goes here" },
           }),
         });
+
+        continue;
       }
 
       return exits.success({
