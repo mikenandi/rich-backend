@@ -15,4 +15,10 @@ module.exports.routes = {
   "GET /api/v1/vendor/all-vendors": { action: "vendor/all-vendors" },
   "POST /api/v1/message/send": { action: "message/send" },
   "GET /api/v1/message/messages": { action: "message/messages" },
+  "POST /api/v1/guest/create": { action: "guest/create-guest" },
+  "GET /api/v1/guest/guests": { action: "guest/guests" },
+  "POST /api/v1/note/create": { action: "note/create-note" },
+  "GET /api/v1/note/notes": { action: "note/notes" },
+  "POST /api/v1/task/create": { action: "task/create-task" },
+  "GET /api/v1/task/tasks": { action: "task/tasks" },
 };
