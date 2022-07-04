@@ -27,7 +27,14 @@ module.exports = {
       let guestsRecord = await Guest.find({
         where: { event_id: inputs.eventId },
       });
+
+      return exits.success({
+        success: true,
+        message: "successfull query",
+        data: guestsRecord,
+      });
     } catch (error) {
+      // catching any other error.
       return exits.failure({
         success: false,
         code: error.code,
