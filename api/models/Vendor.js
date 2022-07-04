@@ -1,5 +1,5 @@
 /**
- * Job.js
+ * Vendor.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -7,44 +7,41 @@
 
 module.exports = {
   primaryKey: "id",
-
   attributes: {
     id: {
       type: "string",
       required: true,
     },
+    user_id: {
+      model: "user",
+    },
     service: {
       type: "string",
       required: true,
     },
-    job_type: {
+    first_package_price: {
       type: "string",
-      isIn: ["full-time", "part-time"],
       required: true,
     },
-    salary: {
-      type: "number",
-    },
-    gender_preference: {
+    first_package_description: {
       type: "string",
-      defaultsTo: "any-gender",
-      isIn: ["male", "female", "any-gender"],
+      required: true,
     },
-    description: {
+    second_package_price: {
       type: "string",
-      defaultsTo: "no descriptions",
+      required: true,
     },
-    job_status: {
+    second_package_description: {
       type: "string",
-      isIn: ["available", "not_available"],
-      defaultsTo: "available",
+      required: true,
     },
-    employer_id: {
-      model: "user",
+    phone_number: {
+      type: "string",
+      required: true,
     },
-    application: {
-      collection: "application",
-      via: "job_id",
+    bussiness_name: {
+      type: "string",
+      required: true,
     },
   },
 };

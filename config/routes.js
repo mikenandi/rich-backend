@@ -9,22 +9,10 @@
  */
 
 module.exports.routes = {
-  "POST /api/v1/register": { action: "auth/signup" },
-  "POST /api/v1/login": { action: "auth/login" },
-  "GET /api/v1/profile": { action: "user/profile" },
-  "POST /api/v1/post-job": { action: "employer/post-job" },
-  "GET /api/v1/posted-jobs": { action: "employer/posted-jobs" },
-  "POST /api/v1/apply-job": { action: "maid/apply-jobs" },
-  "GET /api/v1/applications": { action: "employer/applications" },
-  "PUT /api/v1/call-for-interview": { action: "employer/interview-applicant" },
-  "PUT /api/v1/accept-applicant": { action: "employer/accept-applicant" },
-  "GET /api/v1/application-statuses": { action: "maid/application-status" },
-  "POST /api/v1/register-maid": { action: "agent/register-maid" },
-  "GET /api/v1/available-jobs": { action: "maid/available-jobs" },
-  "GET /api/v1/applicants-to-interview": {
-    action: "employer/applicants-to-interview",
-  },
-  "POST /api/v1/save-token-record": {
-    action: "notification/save-token-record",
-  },
+  "POST /api/v1/auth/signup": { action: "auth/signup" },
+  "POST /api/v1/auth/login": { action: "auth/login" },
+  "POST /api/v1/vendor/register-service": { action: "vendor/register-service" },
+  "GET /api/v1/vendor/all-vendors": { action: "vendor/all-vendors" },
+  "POST /api/v1/message/send": { action: "message/send" },
+  "GET /api/v1/message/messages": { action: "message/messages" },
 };

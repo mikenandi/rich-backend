@@ -1,5 +1,5 @@
 /**
- * Location.js
+ * Message.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -11,27 +11,23 @@ module.exports = {
     id: {
       type: "string",
       required: true,
-      description: "unique identifier of the data",
     },
-    region: {
+    message: {
       type: "string",
       required: true,
     },
-    district: {
+    from_user_id: {
       type: "string",
       required: true,
     },
-    ward: {
+    to_user_id: {
       type: "string",
       required: true,
     },
-    street: {
+    status: {
       type: "string",
-      required: true,
-    },
-    user: {
-      collection: "user",
-      via: "location_id",
+      defaultsTo: "unread",
+      isIn: ["read", "unread"],
     },
   },
 };

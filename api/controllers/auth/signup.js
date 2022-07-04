@@ -9,14 +9,11 @@ module.exports = {
   description: "Signup action.",
 
   inputs: {
-    first_name: {
+    fullname: {
       type: "string",
       example: "michael",
     },
-    last_name: {
-      type: "string",
-      example: "nandi",
-    },
+
     email: {
       type: "string",
       required: true,
@@ -24,35 +21,6 @@ module.exports = {
       example: "mikejohn@gmail.com",
     },
     password: { type: "string", required: true },
-    phone_number: {
-      type: "string",
-      required: true,
-    },
-    gender: {
-      type: "string",
-      required: true,
-    },
-    birthdate: { type: "string", required: true },
-    region: {
-      type: "string",
-      required: true,
-    },
-    district: {
-      type: "string",
-      required: true,
-    },
-    ward: {
-      type: "string",
-      required: true,
-    },
-    street: {
-      type: "string",
-      required: true,
-    },
-    role: {
-      type: "string",
-      required: true,
-    },
   },
 
   exits: {
@@ -67,25 +35,7 @@ module.exports = {
   },
 
   fn: async function (inputs, exits) {
-    // Global variables.
-    let created_location;
     try {
-      // -- 👌 registering location first
-      // generate its id first.
-      let generated_location_id = await sails.helpers.generateId.with({
-        identity: "lc",
-      });
-
-      let location_data = {
-        id: generated_location_id,
-        region: inputs.region,
-        district: inputs.district,
-        ward: inputs.ward,
-        street: inputs.street,
-      };
-
-      created_location = await Location.create(location_data).fetch();
-
       // --hashing password.
       let hashedPassword = await sails.helpers.passwords.hashPassword(
         inputs.password
@@ -99,22 +49,12 @@ module.exports = {
       // --creating variable user.
       let user = {
         id: generated_user_id,
-        first_name: inputs.first_name,
-        last_name: inputs.last_name,
+        fullname: inputs.first_name,
         email: inputs.email,
-        phone_number: inputs.phone_number,
         password: hashedPassword,
-        role: inputs.role,
-        birthdate: inputs.birthdate,
-        gender: inputs.gender,
       };
 
       let created_user = await User.create(user).fetch();
-
-      // making their collection
-      await Location.addToCollection(created_location.id, "user").members([
-        created_user.id,
-      ]);
 
       // --getting private key.
       const pathToKey = path.resolve("secrets/priv_key.pem");
@@ -150,11 +90,9 @@ module.exports = {
     } catch (error) {
       // --when there is a person with that email already created.
       if (error.code === "E_UNIQUE") {
-        await Location.destroyOne({ where: { id: created_location.id } });
-
         return exits.failure({
           success: false,
-          message: "Email or phone number already exists",
+          message: "Email already exists",
         });
       }
 

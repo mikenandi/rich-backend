@@ -79,7 +79,6 @@ module.exports = {
         message: "successfull login",
         data: {
           user_id: user.id,
-          user_role: user.role,
           auth_token: "Bearer " + signedToken,
         },
       });
