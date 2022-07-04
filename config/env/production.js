@@ -22,7 +22,7 @@
 module.exports = {
   datastores: {
     default: {
-      url: "postgres://gdzkollrlgbujp:2f42e6c77daa866d205569890779fbcdc41ac9a93e1457f8515196128b3d8f01@ec2-34-231-221-151.compute-1.amazonaws.com:5432/d3fs0qj9n2clkm",
+      url: "postgres://quxvizftbxbuvb:e711394bd0e8637a240c8f6ba8cd8c9cf98c5112aab5e55d9f4c7fc1b0954a02@ec2-44-206-11-200.compute-1.amazonaws.com:5432/dcq2n1i8brplgi",
       ssl: {
         rejectUnauthorized: false,
       },
