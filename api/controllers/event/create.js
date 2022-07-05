@@ -45,7 +45,7 @@ module.exports = {
         date_of_event: inputs.dateOfEvent,
       };
       // Creating event on the database.
-      let savedEvent = await Event.create(eventData);
+      let savedEvent = await Event.create(eventData).fetch();
 
       // saving it to their collection.
       await User.addToCollection(inputs.userId, "event").members([
