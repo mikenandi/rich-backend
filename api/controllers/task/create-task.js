@@ -50,7 +50,7 @@ module.exports = {
         deadline: inputs.deadline,
       };
 
-      let savedTask = await Task.create(taskData);
+      let savedTask = await Task.create(taskData).fetch();
 
       // adding to collection
       await Event.addToCollection(inputs.eventId, "note").members([
