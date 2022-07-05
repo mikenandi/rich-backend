@@ -4,10 +4,6 @@ module.exports = {
   description: "",
 
   inputs: {
-    id: {
-      type: "string",
-      required: true,
-    },
     title: {
       type: "string",
       required: true,
