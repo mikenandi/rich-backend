@@ -26,6 +26,7 @@ module.exports = {
       // getting all data of guests.
       let eventRecords = await Event.find({
         where: { user_id: inputs.userId },
+        sort: [{ created_at: "DESC" }],
       });
 
       return exits.success({
