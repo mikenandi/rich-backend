@@ -24,7 +24,7 @@ module.exports = {
       type: "string",
       required: true,
     },
-    created_by: {
+    user_id: {
       model: "user",
     },
     guest: {

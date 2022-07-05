@@ -32,5 +32,9 @@ module.exports = {
       collection: "vendor",
       via: "user_id",
     },
+    event: {
+      collection: "event",
+      via: "user_id",
+    },
   },
 };

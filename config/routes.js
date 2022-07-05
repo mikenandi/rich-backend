@@ -21,4 +21,6 @@ module.exports.routes = {
   "GET /api/v1/note/notes": { action: "note/notes" },
   "POST /api/v1/task/create": { action: "task/create-task" },
   "GET /api/v1/task/tasks": { action: "task/tasks" },
+  "POST /api/v1/event/create": { action: "event/create" },
+  "GET /api/v1/event/events": { action: "event/events" },
 };
