@@ -26,6 +26,7 @@ module.exports = {
       // getting all messages that were sent to the person
       let notesRecords = await Note.find({
         where: { event_id: inputs.eventId },
+        sort: [{ created_at: "DESC" }],
       });
 
       return exits.success({
