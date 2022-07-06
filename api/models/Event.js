@@ -32,7 +32,7 @@ module.exports = {
       via: "event_id",
     },
     note: {
-      collection: "guest",
+      collection: "note",
       via: "event_id",
     },
     task: {
