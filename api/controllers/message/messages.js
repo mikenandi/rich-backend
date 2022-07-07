@@ -25,7 +25,12 @@ module.exports = {
     try {
       // getting all messages that were sent to the person
       let messageRecords = await Message.find({
-        or: [{ to: inputs.userId }, { from: inputs.userId }],
+        where: {
+          or: [
+            { from_user_id: inputs.userId },
+            { from_user_id: inputs.userId },
+          ],
+        },
       });
 
       return exits.success({
