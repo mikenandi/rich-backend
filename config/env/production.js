@@ -54,7 +54,7 @@ module.exports = {
   },
 
   sockets: {
-    onlyAllowOrigins: ["*"],
+    onlyAllowOrigins: [""],
   },
 
   log: {
