@@ -39,8 +39,8 @@ module.exports = {
       let messageData = {
         id: id,
         message: inputs.message,
-        from: inputs.userId,
-        to: inputs.sendTo,
+        from_user_id: inputs.userId,
+        to_user_id: inputs.sendTo,
       };
 
       messageRecord = await Message.create(messageData).fetch();
