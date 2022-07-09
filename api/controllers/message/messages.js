@@ -24,7 +24,8 @@ module.exports = {
   fn: async function (inputs, exits) {
     try {
       // getting all messages that were sent to the person
-      let messageRecords = await Message.find({
+      // get
+      let sentMessageRecords = await Message.find({
         where: {
           or: [
             { from_user_id: inputs.userId },
