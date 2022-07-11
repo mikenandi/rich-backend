@@ -23,8 +23,10 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
+      // finding users from the database.
       let userRecord = await User.findOne({ where: { id: inputs.userId } });
 
+      // Response for successfull response.
       return exits.success({
         success: true,
         message: "successful response",
