@@ -49,7 +49,7 @@ module.exports = {
       // --creating variable user.
       let user = {
         id: generated_user_id,
-        fullname: inputs.first_name,
+        fullname: inputs.fullname,
         email: inputs.email,
         password: hashedPassword,
       };
