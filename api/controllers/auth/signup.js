@@ -11,6 +11,7 @@ module.exports = {
   inputs: {
     fullname: {
       type: "string",
+      required: true,
     },
 
     email: {
