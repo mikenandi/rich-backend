@@ -25,7 +25,7 @@ module.exports.sockets = {
    * > https://sailsjs.com/docs/reference/web-sockets/socket-client           *
    *                                                                          *
    ***************************************************************************/
-  // transports: [ 'websocket' ],
+  // transports: ["websocket"],
   /***************************************************************************
    *                                                                          *
    * `beforeConnect`                                                          *
@@ -38,6 +38,7 @@ module.exports.sockets = {
    *                                                                          *
    ***************************************************************************/
   beforeConnect: function (handshake, proceed) {
+    console.log("new device is connectiong");
     // `true` allows the socket to connect.
     // (`false` would reject the connection)
     return proceed(undefined, true);
@@ -50,18 +51,16 @@ module.exports.sockets = {
    * disconnects                                                              *
    *                                                                          *
    ***************************************************************************/
-  // afterDisconnect: function(session, socket, done) {
-  //
-  //   // By default: do nothing.
-  //   // (but always trigger the callback)
-  //   return done();
-  //
-  // },
+  afterDisconnect: function (session, socket, done) {
+    // By default: do nothing.
+    // (but always trigger the callback)
+    return done();
+  },
   /***************************************************************************
    *                                                                          *
    * Whether to expose a 'GET /__getcookie' route that sets an HTTP-only      *
    * session cookie.                                                          *
    *                                                                          *
    ***************************************************************************/
-  // grant3rdPartyCookie: true,
+  grant3rdPartyCookie: false,
 };

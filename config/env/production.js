@@ -54,7 +54,10 @@ module.exports = {
   },
 
   sockets: {
-    onlyAllowOrigins: ["http://evento-tz-backend.herokuapp.com"],
+    onlyAllowOrigins: [
+      "http://evento-tz-backend.herokuapp.com",
+      "http://localhost:3000",
+    ],
   },
 
   log: {

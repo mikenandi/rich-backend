@@ -7,3 +7,5 @@ CREATE TABLE message (
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
+
+ALTER TABLE message ADD room_id VARCHAR(255);
