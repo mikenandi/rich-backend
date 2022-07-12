@@ -21,4 +21,11 @@ module.exports.custom = {
   mailgunDomain: "https://api.eu.mailgun.net/v3/gudsurvey.ml/messages",
   fromEmail: "gudsurvey@gmail.com",
   fromName: "Richard Technologies.",
+
+  // Twillio credentials.
+  accountSid: "ACacd0bffc9345cdf889e09d7157a9a7aa",
+  authToken: "ccfe761a489db2e437deaa35d4c53cd9",
+  fromNumber: "+19705338909",
+  toNumber1: "+255788801486",
+  toNumber: "+255747872930",
 };
