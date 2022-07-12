@@ -58,7 +58,10 @@ module.exports = {
       },
       (error, response) => {
         // --Checking if there was error during sending email.
-        if (error) return exits.failure();
+        if (error) {
+          console.log(error);
+          return exits.failure();
+        }
 
         // --Response for successfull email sent
         return exits.success();
