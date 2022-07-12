@@ -18,7 +18,7 @@ module.exports.custom = {
   // stripeSecret: 'sk_test_Zzd814nldl91104qor5911gjald',
   // …
   mailgunApiKey: "634f082fbfa0ca5054fc5491c272a62f-53ce4923-5d1312be",
-  domain: "https://api.eu.mailgun.net/v3/gudsurvey.ml/messages",
+  mailgunDomain: "https://api.eu.mailgun.net/v3/gudsurvey.ml/messages",
   fromEmail: "gudsurvey@gmail.com",
   fromName: "Richard Technologies.",
 };
