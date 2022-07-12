@@ -30,7 +30,7 @@ module.exports = {
       });
 
       // finding email record for event.
-      let eventRecord = await Event.findOne({ where: { id: guest.event.id } });
+      let eventRecord = await Event.findOne({ where: { id: inputs.eventId } });
 
       for (let guest of guestsRecord) {
         // sending email helpers.
