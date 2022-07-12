@@ -50,7 +50,7 @@ module.exports = {
     // --Sending email.
     nodemailerMailgun.sendMail(
       {
-        from: `<Evento ${sails.config.custom.fromEmail}>`,
+        from: sails.config.custom.fromEmail,
         headers: sails.config.custom.fromName,
         to: inputs.sendTo,
         subject: inputs.subject,
