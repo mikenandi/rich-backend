@@ -24,5 +24,5 @@ module.exports.routes = {
   "POST /api/v1/event/create": { action: "event/create" },
   "GET /api/v1/event/events": { action: "event/events" },
   "GET /api/v1/user/profile": { action: "user/profile" },
-  "GET /api/v1/guest/send-invitations": { actions: "guest/send-invitations" },
+  "POST /api/v1/guest/send-invitations": { actions: "guest/send-invitations" },
 };
