@@ -20,7 +20,7 @@ module.exports.custom = {
 
   // … MailGun Credentials.
   mailgunApiKey: "634f082fbfa0ca5054fc5491c272a62f-53ce4923-5d1312be",
-  mailgunDomain: "gudsurvey.ml",
+  mailgunDomain: "gudsurvey.com",
   fromEmail: "gudsurvey@gmail.com",
   fromName: "Richard Technologies.",
 
