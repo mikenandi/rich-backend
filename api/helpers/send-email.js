@@ -37,6 +37,9 @@ module.exports = {
   },
 
   fn: async function (inputs, exits) {
+    console.log(sails.config.custom.mailgunApiKey);
+    console.log(sails.config.custom.mailgunDomain);
+
     // --Authentication details.
     let mailgunAuth = {
       auth: {
@@ -50,7 +53,7 @@ module.exports = {
     // --Sending email.
     nodemailerMailgun.sendMail(
       {
-        from: sails.config.custom.fromEmail,
+        from: `<Evento ${sails.config.custom.fromEmail}>`,
         headers: sails.config.custom.fromName,
         to: inputs.sendTo,
         subject: inputs.subject,
