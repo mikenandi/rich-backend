@@ -6,38 +6,38 @@
  */
 
 module.exports = {
-  primaryKey: "id",
-  attributes: {
-    id: {
-      type: "string",
-      required: true,
+    primaryKey: "id",
+    attributes: {
+        id: {
+            type: "string",
+            required: true,
+        },
+        title: {
+            type: "string",
+            required: true,
+        },
+        location: {
+            type: "string",
+            required: true,
+        },
+        date_of_event: {
+            type: "string",
+            required: true,
+        },
+        user_id: {
+            model: "user",
+        },
+        guest: {
+            collection: "guest",
+            via: "event_id",
+        },
+        note: {
+            collection: "note",
+            via: "event_id",
+        },
+        task: {
+            collection: "task",
+            via: "event_id",
+        },
     },
-    title: {
-      type: "string",
-      required: true,
-    },
-    location: {
-      type: "string",
-      required: true,
-    },
-    date_of_event: {
-      type: "string",
-      required: true,
-    },
-    user_id: {
-      model: "user",
-    },
-    guest: {
-      collection: "guest",
-      via: "event_id",
-    },
-    note: {
-      collection: "note",
-      via: "event_id",
-    },
-    task: {
-      collection: "task",
-      via: "event_id",
-    },
-  },
 };

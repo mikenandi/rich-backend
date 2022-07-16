@@ -6,22 +6,22 @@
  */
 
 module.exports = {
-  primaryKey: "id",
-  attributes: {
-    id: {
-      type: "string",
-      required: true,
+    primaryKey: "id",
+    attributes: {
+        id: {
+            type: "string",
+            required: true,
+        },
+        subject: {
+            type: "string",
+            required: true,
+        },
+        content: {
+            type: "string",
+            required: true,
+        },
+        event_id: {
+            model: "event",
+        },
     },
-    subject: {
-      type: "string",
-      required: true,
-    },
-    content: {
-      type: "string",
-      required: true,
-    },
-    event_id: {
-      model: "event",
-    },
-  },
 };

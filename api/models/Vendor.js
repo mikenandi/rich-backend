@@ -6,42 +6,42 @@
  */
 
 module.exports = {
-  primaryKey: "id",
-  attributes: {
-    id: {
-      type: "string",
-      required: true,
+    primaryKey: "id",
+    attributes: {
+        id: {
+            type: "string",
+            required: true,
+        },
+        user_id: {
+            model: "user",
+        },
+        service: {
+            type: "string",
+            required: true,
+        },
+        first_package_price: {
+            type: "string",
+            required: true,
+        },
+        first_package_description: {
+            type: "string",
+            required: true,
+        },
+        second_package_price: {
+            type: "string",
+            required: true,
+        },
+        second_package_description: {
+            type: "string",
+            required: true,
+        },
+        phone_number: {
+            type: "string",
+            required: true,
+        },
+        bussiness_name: {
+            type: "string",
+            required: true,
+        },
     },
-    user_id: {
-      model: "user",
-    },
-    service: {
-      type: "string",
-      required: true,
-    },
-    first_package_price: {
-      type: "string",
-      required: true,
-    },
-    first_package_description: {
-      type: "string",
-      required: true,
-    },
-    second_package_price: {
-      type: "string",
-      required: true,
-    },
-    second_package_description: {
-      type: "string",
-      required: true,
-    },
-    phone_number: {
-      type: "string",
-      required: true,
-    },
-    bussiness_name: {
-      type: "string",
-      required: true,
-    },
-  },
 };

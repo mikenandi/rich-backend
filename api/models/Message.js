@@ -6,28 +6,28 @@
  */
 
 module.exports = {
-  primaryKey: "id",
-  attributes: {
-    id: {
-      type: "string",
-      required: true,
+    primaryKey: "id",
+    attributes: {
+        id: {
+            type: "string",
+            required: true,
+        },
+        message: {
+            type: "string",
+            required: true,
+        },
+        from_user_id: {
+            type: "string",
+            required: true,
+        },
+        to_user_id: {
+            type: "string",
+            required: true,
+        },
+        status: {
+            type: "string",
+            defaultsTo: "unread",
+            isIn: ["read", "unread"],
+        },
     },
-    message: {
-      type: "string",
-      required: true,
-    },
-    from_user_id: {
-      type: "string",
-      required: true,
-    },
-    to_user_id: {
-      type: "string",
-      required: true,
-    },
-    status: {
-      type: "string",
-      defaultsTo: "unread",
-      isIn: ["read", "unread"],
-    },
-  },
 };
