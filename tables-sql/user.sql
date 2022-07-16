@@ -6,3 +6,5 @@ CREATE TABLE users (
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
+
+ALTER TABLE users ADD UNIQUE (email);

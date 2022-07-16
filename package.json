@@ -11,6 +11,7 @@
     "moment": "^2.29.3",
     "nodemailer": "^6.7.7",
     "nodemailer-mailgun-transport": "^2.1.4",
+    "prettier": "^2.7.1",
     "sails": "^1.5.2",
     "sails-hook-apianalytics": "^2.0.3",
     "sails-hook-organics": "^2.0.0",
@@ -30,9 +31,9 @@
   },
   "scripts": {
     "start": "NODE_ENV=production node app.js",
-    "test": "npm run lint && npm run custom-tests && echo 'Done.'",
+    "lint-test": "npm run lint && npm run custom-tests && echo 'Done.'",
     "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
-    "custom-tests": "node ./node_modules/mocha/bin/mocha test/lifecycle.test.js test/integration/**/*.test.js",
+    "test": "node ./node_modules/mocha/bin/mocha test/lifecycle.test.js test/integration/**/*.test.js",
     "dev": "nodemon app.js"
   },
   "main": "app.js",
